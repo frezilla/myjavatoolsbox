@@ -13,6 +13,9 @@ public final class Huffman {
     public static void compress(InputStream is) throws IOException {
         Map<Byte, Long> map = Scanner.scan(is);
         Node rootNode = TreeBuilder.build(map);
+        Map<Byte, String> dictionnary = DictionnaryBuilder.build(rootNode);
+        System.out.println(dictionnary);
+       
         
     }
     
