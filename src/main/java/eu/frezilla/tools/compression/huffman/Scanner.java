@@ -12,14 +12,11 @@ final class Scanner {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Map<Byte, Long> scan(@NonNull InputStream is) throws IOException {
-        Integer data;
-
+    public static Map<Byte, Long> scan(@NonNull byte[] bytes) {
         Map<Byte, Long> map = new HashMap<>();
-        while ((data = is.read()) != -1) {
-            byte value = data.byteValue();
-            map.computeIfPresent(value, (k, val) -> (long) (val + 1));
-            map.computeIfAbsent(value, k -> (long) 1);
+        for (byte b : bytes) {
+            map.computeIfPresent(b, (k, val) -> (long) (val + 1));
+            map.computeIfAbsent(b, k -> (long) 1);
         }
 
         return map;
