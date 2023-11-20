@@ -34,8 +34,9 @@ public class HuffmanTest {
      */
     @org.junit.jupiter.api.Test
     public void testCompress() throws Exception {
-        String msg = "Ceci est un message";
-        Huffman.compress(new ByteArrayInputStream(msg.getBytes()));
+        String msg = "Ceci est un message; je suis en train de regarder indiana jones";
+        
+        Huffman.compress(msg.getBytes());
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

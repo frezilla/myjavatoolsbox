@@ -14,12 +14,12 @@ public final class BByte {
         value = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
     }
     
-    public BByte(String s) {
-        value = Objects.requireNonNull(s, "s can not be null");
+    public BByte(String pValue) {
+        value = Objects.requireNonNull(pValue, "pValue can not be null");
         Pattern p = Pattern.compile("[01]{8}");
-        Matcher m = p.matcher(s);
+        Matcher m = p.matcher(pValue);
         if (m.groupCount() != 1) {
-            throw new IllegalArgumentException("s is not valid");    
+            throw new IllegalArgumentException("pValue is not valid");    
         }
     }
     
