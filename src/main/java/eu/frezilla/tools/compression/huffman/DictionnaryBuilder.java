@@ -1,11 +1,10 @@
 package eu.frezilla.tools.compression.huffman;
 
+import eu.frezilla.tools.compression.huffman.Dictionary.Item;
+import eu.frezilla.tools.compression.huffman.Record;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.TreeMap;
-import org.apache.commons.lang3.tuple.Pair;
 
 final class DictionnaryBuilder {
     
@@ -13,21 +12,21 @@ final class DictionnaryBuilder {
         throw new IllegalStateException("Utility class");
     }
     
-    public static Map<Byte, String> build(Node rootNode) {
-        Map<Byte, String> resultMap = new TreeMap<>();
+    public static Dictionary build(Node rootNode) {
+        Dictionary dictionary = new Dictionary();
         if (rootNode != null) {
-            List<Pair<Byte, String>> resultList = scan(rootNode, "");
-            resultList.forEach(p -> resultMap.put(p.getKey(), p.getValue()));
+            List<Item> resultList = scan(rootNode, "");
+            resultList.forEach(item -> dictionary.add(item));
         }
-        return resultMap;
+        return dictionary;
     }
     
-    private static List<Pair<Byte, String>> scan(Node rootNode, String finalValue) {
-        List<Pair<Byte, String>> resultList = new ArrayList<>();
+    private static List<Item> scan(Node rootNode, String finalValue) {
+        List<Item> resultList = new ArrayList<>();
         if (rootNode.isLeaf()) {
             Record myRecord = Objects.requireNonNull(rootNode.getMyRecord(), "Record can not be null");
             myRecord.getValue();
-            resultList.add(Pair.of(myRecord.getValue(), finalValue));
+            resultList.add(Item.of(myRecord.getValue(), finalValue));
         } else {
             Node leftChild = rootNode.getLeftChild();
             Node rightChild = rootNode.getRightChild();
