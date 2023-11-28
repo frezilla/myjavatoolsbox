@@ -1,50 +1,52 @@
 package eu.frezilla.tools.compression.huffman;
 
-import eu.frezilla.tools.number.BByte;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Map;
-import lombok.NonNull;
+import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 
 public final class Huffman {
 
     private Huffman() {
-        throw new IllegalStateException("Utility class");
+        throw new IllegalStateException("Class utilitaire : constructeur interdit");
     }
 
-    public static HuffmanDatas compress(@NonNull byte[] paramBytes) throws IOException {
-        if (paramBytes.length == 0) {
-            throw new IllegalArgumentException("paramBytes size must be greater than 0");
+    public static CompressResult compress(byte[] byteArray) throws IOException {
+        if (Objects.requireNonNull(byteArray, "Le tableau d'octets ne doit pas être null").length == 0) {
+            throw new IllegalArgumentException("Le tableau d'octets ne doit pas être vide");
         }
-        byte[] inputBytes = Arrays.copyOf(paramBytes, paramBytes.length);
+        
+        byte[] inputBytes = Arrays.copyOf(byteArray, byteArray.length);
 
         Map<Byte, Long> map = Scanner.scan(inputBytes);
         Node rootNode = TreeBuilder.build(map);
+        
         Dictionary dictionary = DictionnaryBuilder.build(rootNode);
-
-        StringBuilder outputSB = new StringBuilder();
         Map<Byte, String> dictionaryMap = dictionary.toMap();
+        
+        StringBuilder outputSB = new StringBuilder();
         for (byte b : inputBytes) {
             outputSB.append(dictionaryMap.get(b));
         }
         String outputString = outputSB.toString();
 
-        byte[] outputBytes = new byte[(int) (outputSB.length() / 8) + 1];
+        int outputSize = outputSB.length() / 8;
+        if (outputSB.length() % 8 > 0) {
+            outputSize++;
+        }
+        
+        byte[] outputBytes = new byte[outputSize];
         int indexArray = 0;
-        int indexOutputString = 0;
-        while (indexOutputString < outputString.length()) {
-            String byteValue = 
-                    StringUtils.rightPad(
-                            StringUtils.substring(outputString, indexOutputString, indexOutputString + 8),
-                            8,
-                            "0"
-                    );
-            outputBytes[indexArray] = new BByte(byteValue).toByte();
+        int index = 0;
+        while (index < outputString.length()) {
+            String byteValue = StringUtils.rightPad(StringUtils.substring(outputString, index, index + 8), 8, "0");
+            outputBytes[indexArray] = new BigInteger(byteValue, 2).byteValue();
 
-            indexOutputString = indexOutputString + 8;
+            index = index + 8;
             indexArray++;
         }
-        return new HuffmanDatas(outputBytes, dictionary);
+        return new CompressResult(outputBytes, dictionary);
     }
 }

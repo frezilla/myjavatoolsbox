@@ -9,7 +9,7 @@ import java.util.Objects;
 final class DictionnaryBuilder {
     
     private DictionnaryBuilder() {
-        throw new IllegalStateException("Utility class");
+        throw new IllegalStateException("Classe utilitaire : constructeur interdit");
     }
     
     public static Dictionary build(Node rootNode) {
