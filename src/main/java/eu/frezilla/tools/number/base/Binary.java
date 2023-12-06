@@ -8,10 +8,7 @@ public final class Binary {
     public static String format(byte b) {
         return String.format(
                 "%8s", 
-                Integer
-                        .toBinaryString(b & 0xFF)
-                        .replace(' ', '0')
-        );
+                Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
     }
     
     public static String format(byte[] byteArray) {
@@ -21,12 +18,7 @@ public final class Binary {
             value.append(format(b)).append(" ");
         }
         
-        int nbChars = value.length();
-        if (nbChars == 0) {
-            return "";
-        } else {
-            return value.substring(0, nbChars - 1);
-        }
+        return value.toString().trim();
     }
     
 }
