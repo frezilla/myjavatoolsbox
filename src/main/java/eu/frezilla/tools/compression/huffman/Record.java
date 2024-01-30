@@ -1,13 +1,14 @@
 package eu.frezilla.tools.compression.huffman;
 
+import eu.frezilla.tools.compression.huffman.Record;
 import java.util.Objects;
 import lombok.Data;
 import org.apache.commons.lang3.ObjectUtils;
 
 @Data
-final class Record implements Comparable<Record> {
+final class Record<T> implements Comparable<Record<T>> {
 
-    private final Byte value;
+    private final Analyzable<T> value;
     private final long weigth;
 
     public Record(long weight) {
@@ -15,13 +16,13 @@ final class Record implements Comparable<Record> {
         this.weigth = weight;
     }
     
-    public Record(Byte value, long weight) {
+    public Record(Analyzable<T> value, long weight) {
         this.value = value;
         this.weigth = weight;
     }
 
     @Override
-    public int compareTo(Record object) {
+    public int compareTo(Record<T> object) {
         if (object == null) {
             return Integer.MAX_VALUE;
         }

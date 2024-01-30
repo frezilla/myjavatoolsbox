@@ -10,7 +10,7 @@ import java.util.Objects;
  * 
  * @see NumericRepresentation
  */
-public enum NumericRepresentationEnum {
+public enum NREnum {
     ZERO(0, "0"),
     ONE(1, "1"),
     TWO(2, "2"),
@@ -30,7 +30,7 @@ public enum NumericRepresentationEnum {
             
     private final NumericRepresentation numericRepresentation;
 
-    private NumericRepresentationEnum(int value, String representation) {
+    private NREnum(int value, String representation) {
         this.numericRepresentation = new NumericRepresentationImpl(representation, value);
     }
     
@@ -49,7 +49,7 @@ public enum NumericRepresentationEnum {
      * utilisée dans l'énumération {@code NumericRepresentationEnum}.
      * 
      * @see NumericRepresentation
-     * @see NumericRepresentationEnum
+     * @see NREnum
      */
     private static class NumericRepresentationImpl implements NumericRepresentation {
         

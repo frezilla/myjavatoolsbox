@@ -20,11 +20,13 @@ final class TreeBuilder {
     
     private static Node build(LinkedList<Node> list) {
         switch (list.size()) {
-            case 0:
+            case 0 -> {
                 return null;
-            case 1:
+            }
+            case 1 -> {
                 return list.getFirst();
-            default: {
+            }
+            default -> {
                 Collections.sort(list);
                 Node firstNode = list.removeFirst();
                 Node secondNode = list.removeFirst();

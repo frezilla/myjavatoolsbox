@@ -1,6 +1,10 @@
-package eu.frezilla.tools.compression.huffman;
+package eu.frezilla.tools.test.compression.huffman;
 
+import eu.frezilla.tools.compression.huffman.CompressResult;
+import eu.frezilla.tools.compression.huffman.CompressResult;
 import eu.frezilla.tools.compression.huffman.Dictionary.Item;
+import eu.frezilla.tools.compression.huffman.Huffman;
+import eu.frezilla.tools.compression.huffman.Huffman;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
