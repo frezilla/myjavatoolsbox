@@ -75,7 +75,7 @@ public interface NumericRepresentation extends Comparable<NumericRepresentation>
      * @see Object#hashCode()
      */
     default int defaultHashCode() {
-        return Objects.hash(getRepresentation(), getValue());
+        return Objects.hash(getValue(), getRepresentation());
     }
 
     /**
