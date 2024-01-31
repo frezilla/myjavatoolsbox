@@ -2,22 +2,22 @@ package eu.frezilla.tools.number.base;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.function.Consumer;
 
 public final class NRSet implements NRCollection {
     
-    private final Map<String, NumericRepresentation> nrByRepresentationMap;
-    private final Map<Integer, NumericRepresentation> nrByValueMap;
-    private final int size;
+    private final Set<NumericRepresentation> nrSet;
     
     private NRSet(Set<NumericRepresentation> set) {
-        this.nrByRepresentationMap = set.stream().collect(Collectors.toMap(NumericRepresentation::getRepresentation, Function.identity()));
-        this.nrByValueMap = set.stream().collect(Collectors.toMap(NumericRepresentation::getValue, Function.identity()));
+        this.nrSet = set;
+    }
+    
+    @Override
+    public void forEach(Consumer<? super NumericRepresentation> action) {
+        nrSet.forEach(action);
     }
     
     /**
@@ -33,19 +33,17 @@ public final class NRSet implements NRCollection {
 
     @Override
     public boolean isEmpty() {
-        return size == 0;
+        return nrSet.isEmpty();
     }
 
     @Override
     public Iterator<NumericRepresentation> iterator() {
-        this.nrByRepresentationMap.values().iterator().re
-        
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return nrSet.iterator();
     }
 
     @Override
     public int size() {
-        return size;
+        return nrSet.size();
     }
     
     /**

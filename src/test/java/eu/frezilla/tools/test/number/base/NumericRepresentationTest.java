@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
  * @see NumericRepresentation
  * @see NREnum
  */
-public class NREnumTest {
+public class NumericRepresentationTest {
 
     private void checkToNumericRepresentationAsserts(NumericRepresentation numericRepresentation, int value, String representation) {
         Assertions.assertEquals(numericRepresentation.getRepresentation(), representation);
